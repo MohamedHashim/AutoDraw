@@ -2,14 +2,21 @@ package com.mohamedhashim.autodraw;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextClock;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -22,11 +29,34 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private String TAG = MainActivity.class.getSimpleName();
     InterstitialAd mInterstitialAd;
+    private ImageButton share;
+    private TextView app_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/White Chocolate Mint - TTF.ttf");
+
+        app_name = (TextView) findViewById(R.id.app_name);
+        app_name.setTypeface(typeFace);
+        share = (ImageButton) findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, "AutoDraw");
+                    String sAux = "\nLet me recommend you the AutoDraw App\n\n";
+                    sAux = sAux + "https://play.google.com/store/apps/details?id=com.mohamedhashim.autodraw \n\n";
+                    i.putExtra(Intent.EXTRA_TEXT, sAux);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch (Exception e) {
+                    //e.toString();
+                }
+            }
+        });
         mInterstitialAd = new InterstitialAd(this);
 
         // set the ad unit ID

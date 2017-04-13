@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.mohamedhashim.autodraw.MainActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"></include>
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <WebView
         android:id="@+id/webview"
+        android:layout_marginBottom="29dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
@@ -17,18 +23,13 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
         android:layout_x="46dp"
         android:layout_y="390dp"
-        ads:adSize="BANNER"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_gravity="bottom|center"
-        ads:adUnitId="@string/banner"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="445dp">
-    </com.google.android.gms.ads.AdView>
-</FrameLayout>
 
-</RelativeLayout>
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner"></com.google.android.gms.ads.AdView>
+</FrameLayout>
+</LinearLayout>
